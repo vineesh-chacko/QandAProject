@@ -212,6 +212,16 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QandADomainModels\QandADomainModels.csproj">
+      <Project>{3d0f22d5-aed0-4d5f-bb7f-8641c9e5ca03}</Project>
+      <Name>QandADomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QandAProjectViewModels\QandAViewModels.csproj">
+      <Project>{f9ffd9f5-bdcd-48bb-b542-0da4de6eb5c8}</Project>
+      <Name>QandAViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

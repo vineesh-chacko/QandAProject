@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QandADomainModels", "QandAD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QandAViewModels", "QandAProjectViewModels\QandAViewModels.csproj", "{F9FFD9F5-BDCD-48BB-B542-0DA4DE6EB5C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QandA.Repository", "QandAProject.Repository\QandA.Repository.csproj", "{753087AF-27B5-4AA5-832A-78F52B398D1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QandARepository", "QandAProject.Repository\QandARepository.csproj", "{753087AF-27B5-4AA5-832A-78F52B398D1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QandAServiceLayer", "QandAServiceLayer\QandAServiceLayer.csproj", "{4ED21116-9C06-4971-ABB8-F1A504B73A22}"
 EndProject
