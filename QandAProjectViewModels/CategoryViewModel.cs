@@ -11,7 +11,7 @@ namespace QandAProjectViewModels
     public class CategoryViewModel
     {
         [Required]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public string CategoryName { get; set; }

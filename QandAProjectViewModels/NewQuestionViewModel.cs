@@ -17,10 +17,10 @@ namespace QandAProjectViewModels
         public DateTime QuestionDateAndTime { get; set; }
 
         [Required]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         [Required]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public int VotesCount { get; set; }

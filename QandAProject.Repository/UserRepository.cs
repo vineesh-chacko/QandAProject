@@ -21,9 +21,9 @@ namespace QandAProjectRepository
             return userId;
         }
 
-        public User GetUserByEmails(string email)
+        public List<User> GetUserByEmails(string email)
         {
-            return db.Users.Where(u => u.Email == email).FirstOrDefault();
+            return db.Users.Where(u => u.Email == email).ToList();
         }
 
         public User GetUserByEmailsAndPassword(string email, string password)
@@ -42,7 +42,7 @@ namespace QandAProjectRepository
             return db.Users.Where(u => u.IsAdmin == false).OrderBy(u => u.Name).ToList();
         }
 
-        public void InserUser(User user)
+        public void InsertUser(User user)
         {
             db.Users.Add(user);
             db.SaveChanges();
@@ -82,12 +82,12 @@ namespace QandAProjectRepository
 
     public interface IUserRepository
     {
-        void InserUser(User user);
+        void InsertUser(User user);
         void UpdateUserDetails(User user);
         void UpdateUserPassword(User user);
         List<User> GetUsers();
         User GetUserByEmailsAndPassword(string email, string password);
-        User GetUserByEmails(string email);
+        List<User> GetUserByEmails(string email);
         User GetUserByUserId(int userId);
         int GetLatestUserId();
         void DeleteUser(int userId);

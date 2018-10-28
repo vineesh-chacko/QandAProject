@@ -10,7 +10,7 @@ namespace QandAProjectViewModels
 {
     public class EditUserDetailsViewModel
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [RegularExpression(@"(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})")]

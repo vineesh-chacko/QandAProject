@@ -10,7 +10,7 @@ namespace QandAProjectViewModels
 {
     public class EditUserPasswordViewModel
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public string Email { get; set; }
