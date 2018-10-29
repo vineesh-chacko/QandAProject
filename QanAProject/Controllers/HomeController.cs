@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QandAServiceLayer;
 
 namespace QanAProject.Controllers
 {
     public class HomeController : Controller
     {
+        IQuestionsService qs;
+        public HomeController(IQuestionsService questionsService)
+        {
+            qs = questionsService;
+        }
         public ActionResult Index()
         {
-            return View();
+            var list = qs.GetQuestions().Take(10).ToList();
+            return View(list);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QandAProjectViewModels
+namespace QandAViewModels
 {
     public class UserViewModel
     {
@@ -14,7 +14,7 @@ namespace QandAProjectViewModels
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        public string Mobile { get; set; }
+        public Int32 Mobile { get; set; }
         public bool IsAdmin { get; set; }
     }
 }

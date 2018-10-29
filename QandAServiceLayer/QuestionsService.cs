@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QandADomainModels;
-using QandAProjectViewModels;
+using QandAViewModels;
 using QandAProjectRepository;
 using AutoMapper;
 using AutoMapper.Configuration;
