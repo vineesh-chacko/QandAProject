@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Register";
 }
 
@@ -75,7 +75,7 @@
 <script>
     $("a[href='/account/register']").attr("id", "active");
 
-    $(document).on("submit", "needs-validation", validate); 
+    $(document).on("submit", "needs-validation", validate);
     $(".needs-validation input").blur(validate);
 
     function validate(event) {
@@ -88,4 +88,25 @@
     function escapeRegExp(str) {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
+
+
+    $("#txtEmail").blur(() => {
+        $.ajax({
+            url: "/api/account?email" ? + $("#txtEmail").val(),
+            type: "GET",
+            success: (response) => {
+                if (response == "Not Found") {
+                    $(".email-exist").text("");
+                    $(".email-exist").parent(".form-group").find(".valid-feedback").css("color", "#28a745");
+                }
+                else {
+                    $(".email-exist").text("Email already registered");
+                    $(".email-exist").parent(".form-group").find(".valid-feedback").css("color", "white");
+                }
+            },
+            error: () => {
+                $(".email-exist").text("Error");
+            }
+        });
+    });
 </script>

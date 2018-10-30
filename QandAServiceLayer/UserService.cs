@@ -11,7 +11,7 @@ using AutoMapper.Configuration;
 
 namespace QandAServiceLayer
 {
-    public class UserService : IUserService
+    public class UserService : IUsersService
     {
         IUserRepository userRepository;
         public UserService()
@@ -99,7 +99,7 @@ namespace QandAServiceLayer
         }
     }
 
-    public interface IUserService
+    public interface IUsersService
     {
         int InsertUser(RegisterViewModel uvm);
         void UpdateUserDetails(EditUserDetailsViewModel uvm);

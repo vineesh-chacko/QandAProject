@@ -17,7 +17,7 @@ namespace QandADomainModels
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string Name { get; set; }
-        public Int32 Mobile { get; set; }
+        public string Mobile { get; set; }
         public bool IsAdmin { get; set; }
     }
 }
