@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QanAProject.CustomFilters;
 using QandAServiceLayer;
 using QandAViewModels;
 
@@ -50,17 +51,17 @@ namespace QanAProject.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel lvm)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-               var userDetails = this.userService.GetUsersByEmailAndPassword(lvm.Email, lvm.Password);
-                if(userDetails!=null)
+                var userDetails = this.userService.GetUsersByEmailAndPassword(lvm.Email, lvm.Password);
+                if (userDetails != null)
                 {
                     Session["CurrentUserId"] = userDetails.UserId;
                     Session["CurrentUserName"] = userDetails.Name;
                     Session["CurrentUserEmail"] = userDetails.Email;
                     Session["CurrentUserPassword"] = userDetails.Password;
                     Session["CurrentUserIsAdmin"] = userDetails.IsAdmin;
-                    if(userDetails.IsAdmin)
+                    if (userDetails.IsAdmin)
                     {
                         return RedirectToRoute(new { Area = "admin", controller = "AdminHome", action = "Index" });
                     }
@@ -91,14 +92,59 @@ namespace QanAProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangeProfile()
+        
+        
+        public ActionResult ChangeUserProfile()
         {
-            int uid = Convert.ToInt32(Session["CurrentUserID"]);
+            int uid = Convert.ToInt32(Session["CurrentUserId"]);
             UserViewModel uvm = this.userService.GetUsersByUserID(uid);
             EditUserDetailsViewModel eudvm = new EditUserDetailsViewModel() { Name = uvm.Name, Email = uvm.Email, Mobile = uvm.Mobile, UserId = uvm.UserId };
             return View(eudvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeUserProfile(EditUserDetailsViewModel eudvm)
+        {
+            if (ModelState.IsValid)
+            {
+                eudvm.UserId = Convert.ToInt32(Session["CurrentUserId"]);
+                this.userService.UpdateUserDetails(eudvm);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("x", "Invalid Data");
+                return View(eudvm);
+            }
+        }
+
+
+        [UserAuthorizationFilterAttribute]
+        public ActionResult ChangePassword()
+        {
+            int uid = Convert.ToInt32(Session["CurrentUserId"]);
+            UserViewModel uvm = this.userService.GetUsersByUserID(uid);
+            EditUserPasswordViewModel eupvm = new EditUserPasswordViewModel() { Email = uvm.Email, Password = "", ConfirmPassword = "", UserId = uvm.UserId };
+            return View(eupvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [UserAuthorizationFilterAttribute]
+        public ActionResult ChangePassword(EditUserPasswordViewModel eupvm)
+        {
+            if (ModelState.IsValid)
+            {
+                eupvm.UserId = Convert.ToInt32(Session["CurrentUserId"]);
+                this.userService.UpdateUserPassword(eupvm);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("x", "Invalid data");
+                return View(eupvm);
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace QandAProjectRepository
         void UpdateAnswerVotesCount(int aid, int uid, int value);
         void DeleteAnswer(int aid);
         List<Answer> GetAnswersByQuestionId(int qid);
-        List<Answer> GetAnswersByAnswerID(int AnswerID);
+        List<Answer> GetAnswersByAnswerId(int AnswerID);
     }
     public class AnswersRepository : IAnswersRepository
     {
@@ -73,7 +73,7 @@ namespace QandAProjectRepository
             List<Answer> ans = db.Answers.Where(temp => temp.QuestionId == qid).OrderByDescending(temp => temp.AnswerDateAndTime).ToList();
             return ans;
         }
-        public List<Answer> GetAnswersByAnswerID(int aid)
+        public List<Answer> GetAnswersByAnswerId(int aid)
         {
             List<Answer> ans = db.Answers.Where(temp => temp.AnswerId == aid).ToList();
             return ans;

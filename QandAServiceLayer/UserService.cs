@@ -61,9 +61,17 @@ namespace QandAServiceLayer
             return null;
         }
 
-        public UserViewModel GetUsersByUserID(int UserID)
+        public UserViewModel GetUsersByUserID(int userID)
         {
-            throw new NotImplementedException();
+            var _user = userRepository.GetUserByUserId(userID);
+            UserViewModel vm = null;
+            if (_user != null)
+            {
+                var config = new MapperConfiguration(cfg => { cfg.CreateMap<UserViewModel, User>(); cfg.IgnoreUnmapped(); });
+                IMapper mapper = config.CreateMapper();
+                vm = mapper.Map<User, UserViewModel>(_user);
+            }
+            return vm;
         }
 
         public int InsertUser(RegisterViewModel uvm)
