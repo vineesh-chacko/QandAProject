@@ -15,6 +15,8 @@ namespace QanAProject
 
             container.RegisterType<IQuestionsService, QuestionsService>();
             container.RegisterType<IUsersService, UserService>();
+            container.RegisterType<ICategoriesService, CategoriesService>();
+            container.RegisterType<IAnswersService, AnswersService>();
             // For Mvc
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
 

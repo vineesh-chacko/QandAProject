@@ -20,7 +20,7 @@ namespace QandAServiceLayer
         void UpdateQuestionViewsCount(int qid, int value);
         void DeleteQuestion(int qid);
         List<QuestionViewModel> GetQuestions();
-        QuestionViewModel GetQuestionByQuestionID(int QuestionID, int UserID);
+        QuestionViewModel GetQuestionByQuestionId(int QuestionID, int UserID);
     }
     public class QuestionsService : IQuestionsService
     {
@@ -73,20 +73,21 @@ namespace QandAServiceLayer
             return qvm;
         }
 
-        public QuestionViewModel GetQuestionByQuestionID(int QuestionID, int UserID = 0)
+        public QuestionViewModel GetQuestionByQuestionId(int QuestionId, int UserId = 0)
         {
-            Question q = qr.GetQuestionByQuestionId(QuestionID).FirstOrDefault();
+            Question q = qr.GetQuestionByQuestionId(QuestionId).FirstOrDefault();
             QuestionViewModel qvm = null;
             if (q != null)
             {
                 var config = new MapperConfiguration(cfg => { cfg.CreateMap<Question, QuestionViewModel>(); cfg.IgnoreUnmapped(); });
                 IMapper mapper = config.CreateMapper();
-                qvm = mapper.Map<Question, QuestionViewModel>(q);
 
+                qvm = mapper.Map<Question, QuestionViewModel>(q);
+                if (qvm.Answers.Count > 0)
                 foreach (var item in qvm.Answers)
                 {
                     item.CurrentUserVoteType = 0;
-                    VoteViewModel vote = item.Votes.Where(temp => temp.UserId == UserID).FirstOrDefault();
+                    VoteViewModel vote = item.Votes.Where(temp => temp.UserId == UserId).FirstOrDefault();
                     if (vote != null)
                     {
                         item.CurrentUserVoteType = vote.VoteValue;

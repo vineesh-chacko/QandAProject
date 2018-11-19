@@ -9,7 +9,7 @@
         <span class="badge badge-info">@Model.Category.CategoryName</span>
     </td>
     <td>
-        @if (Convert.ToInt32(Session["CurrentUserId"]) != Model.UserID)
+        @if (Convert.ToInt32(Session["CurrentUserId"]) != Model.UserId)
         {
             @:by @Model.User.Name
         }

@@ -51,6 +51,7 @@ namespace QanAProject.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel lvm)
         {
+
             if (ModelState.IsValid)
             {
                 var userDetails = this.userService.GetUsersByEmailAndPassword(lvm.Email, lvm.Password);
@@ -73,7 +74,7 @@ namespace QanAProject.Controllers
                 else
                 {
                     ModelState.AddModelError("x", "Invlaid email/password");
-                    return View(userDetails);
+                    return View(lvm);
                 }
             }
             else

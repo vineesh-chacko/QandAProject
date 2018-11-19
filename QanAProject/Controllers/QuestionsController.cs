@@ -24,8 +24,8 @@ namespace QanAProject.Controllers
         public ActionResult View(int id)
         {
             this.qs.UpdateQuestionViewsCount(id, 1);
-            int uid = Convert.ToInt32(Session["CurrentUserID"]);
-            QuestionViewModel qvm = this.qs.GetQuestionByQuestionID(id, uid);
+            int uid = Convert.ToInt32(Session["CurrentUserId"]);
+            QuestionViewModel qvm = this.qs.GetQuestionByQuestionId(id, uid);
             return View(qvm);
         }
 
@@ -34,7 +34,7 @@ namespace QanAProject.Controllers
         [UserAuthorizationFilterAttribute]
         public ActionResult AddAnswer(NewAnswerViewModel navm)
         {
-            navm.UserId = Convert.ToInt32(Session["CurrentUserID"]);
+            navm.UserId = Convert.ToInt32(Session["CurrentUserId"]);
             navm.AnswerDateAndTime = DateTime.Now;
             navm.VotesCount = 0;
             if (ModelState.IsValid)
@@ -45,7 +45,7 @@ namespace QanAProject.Controllers
             else
             {
                 ModelState.AddModelError("x", "Invalid Data");
-                QuestionViewModel qvm = this.qs.GetQuestionByQuestionID(navm.QuestionId, navm.UserId);
+                QuestionViewModel qvm = this.qs.GetQuestionByQuestionId(navm.QuestionId, navm.UserId);
                 return View("View", qvm);
             }
         }
@@ -55,7 +55,7 @@ namespace QanAProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                avm.UserId = Convert.ToInt32(Session["CurrentUserID"]);
+                avm.UserId = Convert.ToInt32(Session["CurrentUserId"]);
                 this.asr.UpdateAnswer(avm);
                 return RedirectToAction("View", new { id = avm.QuestionId });
             }
@@ -84,7 +84,7 @@ namespace QanAProject.Controllers
                 qvm.ViewsCount = 0;
                 qvm.VotesCount = 0;
                 qvm.QuestionDateAndTime = DateTime.Now;
-                qvm.UserId = Convert.ToInt32(Session["CurrentUserID"]);
+                qvm.UserId = Convert.ToInt32(Session["CurrentUserId"]);
                 this.qs.InsertQuestion(qvm);
                 return RedirectToAction("Questions", "Home");
             }
